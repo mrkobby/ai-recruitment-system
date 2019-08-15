@@ -1,0 +1,6 @@
+.ap-banner{margin-top: 2px;height: 100px;background-color: #343c3c;background-size: cover;background-position: center;background-attachment: scroll;background-repeat: no-repeat;-webkit-background-size: cover;-moz-background-size: cover;}
+.ap-banner-span{height: auto;*background-color:#8f3a3a;text-align:center;}
+.ap-banner-text{padding:20px;margin-top:5px;}
+.ap-banner-text-lg{color: #e6e6e6;font-size: 3em;line-height: 60px;font-weight: bold;}
+.ap-banner-text-md{color: #fff;font-size: 2em;line-height: 30px;font-weight: bold;}
+.ap-banner-text-sm{color: #fff;font-size: 1em;line-height: 60px;font-weight: bold;}

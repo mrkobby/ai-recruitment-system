@@ -1,0 +1,16 @@
+IndexIgnore *
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+RewriteRule ^sync&([0-9a-zA-Z]+) sync.php?e=$1 [NC,L]
+RewriteRule ^profile&([0-9a-zA-Z]+) profile.php?e=$1 [NC,L]
+RewriteRule ^notifications&([0-9a-zA-Z]+) notifications.php?e=$1 [NC,L]
+RewriteRule ^jobs&([0-9a-zA-Z]+) jobs.php?e=$1 [NC,L]
+RewriteRule ^settings&([0-9a-zA-Z]+) settings.php?e=$1 [NC,L]
+RewriteRule ^r-job&([0-9a-zA-Z]+) r-job.php?e=$1 [NC,L]
+RewriteRule ^bookmarks&([0-9a-zA-Z]+) bookmarks.php?e=$1 [NC,L]
+RewriteRule ^activation&([0-9a-zA-Z]+) activation.php?e=$1 [NC,L]
+RewriteRule ^reset&([0-9a-zA-Z]+) reset.php?e=$1 [NC,L]
+RewriteRule ^recruiter&([0-9a-zA-Z]+) recruiter.php?e=$1 [NC,L]
+

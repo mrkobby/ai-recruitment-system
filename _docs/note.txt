@@ -1,0 +1,62 @@
+	<div class="main">
+	  <div class="main-inner">
+		<div class="container">
+		   <div class="row">
+			<div class="span12">
+			  <div class="widget widget-nopad">
+				<div class="widget-header text-center">
+				  <h3>You have ?0? notifications</h3>
+				</div>
+				<div class="widget-content">
+				  <div class="widget big-stats-container">
+					<div class="widget-content">
+					  <div class="cf big_stats">
+						<div class="widget-content">
+						  <div class="cf">
+						   <div class="profile_widgets"> 
+							 <div id="load_r_notes">
+							   <?php echo $notification_list;?>	
+							     <div id="" class="profile_widget" style="margin: 5px .9% 10px;">
+									<div style="float: right;padding: 5px;"><button class="btn btn-primary btn-small"><span class="fa fa-close"></span></button></div>
+									 <div class="profile_widget-image" style="vertical-align: top;"><span style="font-size: 4em;color: #a2a2a2;" class="fa fa-briefcase"></div>
+									 <div class="profile_widget-details"><h4><span class="grey-out">Job ID:</span><a href="#" style="font-weight:bold;"> mtc_023_fbr</a></h4>
+									 <h4 style="margin-top: 5px;"><span class="grey-out">Number of candidates shortlisted:</span> 1 / 8 <button class="btn btn-small" style="line-height: 15px;"><span class="fa fa-eye"></span> View applicants</button></h4>
+									 <h4 style="margin-top: 5px;"><a href="#">View details</a></h4>
+									 </div>
+								 </div>
+								 
+								 <div id="" class="profile_widget" style="margin: 5px .9% 10px;">
+									<div style="float: right;padding: 5px;"><button class="btn btn-primary btn-small"><span class="fa fa-close"></span></button></div>
+									 <div class="profile_widget-image" style="vertical-align: top;"><span style="font-size: 4em;color: #a2a2a2;" class="fa fa-briefcase"></div>
+									 <div class="profile_widget-details"><h4><span class="grey-out">Job ID:</span> <a href="#" style="font-weight:bold;"> mtc_023_fbr</a></h4>
+									 <h4 style="margin-top: 5px;"><span class="grey-out">Number of applicants:</span> 8</h4>
+									 <h4 style="margin-top: 5px;"><span class="grey-out">Best candidates shortlisted:</span> 1</h4>
+									 <h4 style="margin-top: 5px;"><a href="#" target="blank">View results</a></h4>
+									 </div>
+								 </div>
+								 
+								  <div id="" class="profile_widget" style="margin: 5px .9% 10px;"><div class="profile_widget-image" style="vertical-align: top;"><img src="_img/owlphin_gif.gif" style="width: 50px;height: auto;" alt="Owlphin"></div>
+									 <div class="profile_widget-details"><h4><span class="grey-out" style="color: #606060;font-size: 12px;">
+									   Hi ?user?! Thanks for joining Owlphin. We hope you get excited when you consider the possibilities of landing your dream job. We can't wait for you to get started. 
+									   You might want to start by:<br>
+									   • Creating your profile
+									   <br>
+									   Also here are a few tips to get you started. 
+									   </span></h4>
+									 <h4 style="margin-top: 5px;"><a href="#" target="blank"><span class="fa fa-lightbulb-o"></span> View tips</a></h4>
+									 </div>
+								 </div>
+							   </div>
+						    </div>
+						  </div>
+					    </div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>

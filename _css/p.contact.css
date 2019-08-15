@@ -1,0 +1,23 @@
+.contact-banner{margin-top: 40px;height: 200px;background: url(../_img/map-image.png);background-color: #343c3c;background-size: cover;background-position: center;background-attachment: scroll;background-repeat: no-repeat;-webkit-background-size: cover;-moz-background-size: cover;}
+.contact-banner-span{height: auto;*background-color:#8f3a3a;}
+.contact-banner-text{padding:20px;margin-top:50px;}
+.contact-banner-text-lg{color: #e6e6e6;font-size: 4em;line-height: 60px;font-weight: bold;}
+.contact-banner-text-md{color: #fff;font-size: 2em;line-height: 30px;font-weight: bold;}
+.contact-banner-text-sm{color: #fff;font-size: 1em;line-height: 60px;font-weight: bold;}
+
+.contact-section{height: auto;background-color: #f5f5f5;}
+.contact-section-text{padding:20px;margin-top:10px;}
+.contact-section-text-md{color: #565656;font-size: 2.5em;line-height: 30px;font-weight: bold;}
+.contact-section-text-sm{color: #3e3c3c;font-size: 1.5em;line-height: 30px;font-weight: bold;}
+.contact-section-text .field{margin-bottom:15px;}
+.contact-section-text .field input{width: 98%;padding: 10px;}
+.contact-section-text .field textarea{width: 98%; max-width:98%;min-width:98%;max-height: 100px;padding: 10px;}
+.contact-section-text .field label{font-size: 1.2em;}
+.contact-section-text .field button{font-size: 1.2em;width:100%;}
+
+.contact-info-header-text{font-size: 1.4em;color: #565656;font-weight: bold;}
+.contact-info-text{font-size: 1.2em;color: #565656;}
+
+@media(max-width:768px){
+	.contact-section .span3{display:none!important}
+}

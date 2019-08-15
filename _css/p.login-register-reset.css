@@ -1,0 +1,72 @@
+.hand{cursor:pointer;}
+.login-background{background: url(../_img/img1.png) no-repeat;background-position: center;background-size: cover;background-attachment:fixed;}
+.register-background{background: url(../_img/img2.png) no-repeat;background-position: center;background-size: cover;background-attachment:fixed;}
+.reset-background{background: url(../_img/img4.png) no-repeat;background-position: center;background-size: cover;background-attachment:fixed;}
+@media(max-width:768px){
+	.login-background{background-color: black;background-position: inherit;background-size: inherit;background-attachment:fixed;}
+	.register-background{background-color: black;background-position: inherit;background-size: inherit;background-attachment:fixed;}
+	.reset-background{background-color: black;background-position: inherit;background-size: inherit;background-attachment:fixed;}
+}
+.login-logo, .register-logo {font-size: 35px;text-align: center;font-weight: 800;margin-bottom:20px;}
+.account-container {position: relative;width: 380px; display: block;margin: 35px auto 20px auto;background: rgba(255, 255, 255, 0.84);border: 1px solid #d5d5d5;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;box-shadow:  0px 0px 2px #dadada, inset 0px -3px 0px #e6e6e6;}
+.content {padding: 16px 28px 23px;} 
+.login-fields {}
+.login-fields .field {margin-bottom: 1.25em;}
+.login-fields label {*display: none;}
+.login-fields input {font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;font-size: 13px;color: #000;padding: 11px 15px 10px 15px;background-color: #fdfdfd;width: 290px;display: block;margin: 0;box-shadow: inset 2px 2px 4px #f1f1f1;border-color: rgba(38, 44, 48, 0.8);}
+.login-fields input:focus {border-color: rgba(38, 44, 48, 0.8);-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(31, 31, 32, 0.6);-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(39, 40, 41, 0.6);outline: 0;outline: thin dotted \9;}
+.login-fields select {width: 320px;border:1px solid;border-color:rgba(38, 44, 48, 0.8);height: 38px;-webkit-appearance: menulist;box-sizing: border-box;align-items: center;white-space: pre;-webkit-rtl-ordering: logical;color: black;background-color: white;cursor: default;border-width: 1px;border-style: solid;border-color: initial;border-image: initial;}
+.login-actions {float: left;width: 100%;margin-top: -1em;margin-bottom: 1.25em;}
+.login-social {float: left;	padding: 10px 0 15px;border: 1px dotted #CCC;border-right: none;border-left: none;	}
+.login-extra {display: block;  margin: 1.5em auto;text-align: center;line-height: 19px; text-shadow: 1px 1px 0px #fff; 	}
+.account-container h1 {margin-bottom: .4em;color: #525252;}
+.button {-webkit-border-radius: 3px; -moz-border-radius: 3px;width: 100%; border-radius: 3px; display: inline-block; float: right; margin-top: 18px;}
+
+.register .login-social {margin-bottom: 1em;}
+.register .login-actions {margin-bottom: 0;}
+.register .login-fields input {width: 299px;padding-left: 6px;}
+.account-container-larger .login-fields input {width: 220px;padding-left: 6px;}
+.account-container-larger .login-fields select {width: 242px;border:1px solid;border-color:rgba(38, 44, 48, 0.8);height: 38px;-webkit-appearance: menulist;box-sizing: border-box;align-items: center;white-space: pre;-webkit-rtl-ordering: logical;color: black;background-color: white;cursor: default;border-width: 1px;border-style: solid;border-color: initial;border-image: initial;}
+.register h1 {color: #444;}
+.register span.login-checkbox {position: relative;top: -6px;width: 200px;}
+.register span.login-checkbox > input[type="checkbox"] + label {position: relative;line-height: 1.3em;}
+
+.account-container-larger {position: relative;width: 560px; display: block;margin: 35px auto 20px auto;background: rgba(255, 255, 255, 0.84);border: 1px solid #d5d5d5;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;box-shadow:  0px 0px 2px #dadada, inset 0px -3px 0px #e6e6e6;}
+.register .login-fields .field-flex {margin-bottom: 1.25em;display:inline-flex;}
+.register .login-fields .field .max {width:96%;}
+.register .login-fields .field-flex .margin{margin-left:20px;}
+
+@media(max-width:979px) {
+	.account-container-larger {width: 460px; margin-top: 35px;}
+	.register .login-fields .field-flex {margin-bottom: 1.25em;display:block;}
+	.register .login-fields .field-flex .margin{margin-left:0px;margin-top:15px;}
+	.register .login-fields .field-flex input{width:96%;}
+	.register .login-fields .field-flex select{width:410px;}
+}
+
+@media (max-width: 480px) {
+	.account-container {width: 280px;	margin-top: 35px;}
+	.login-fields input {width: 195px;}
+	.login-social {width: 100%;}
+	.register .login-fields input {width: 204px;padding-left: 6px;}
+	.register .login-fields .field-flex select{width:238px;}
+	.login-fields select {width: 228px;}
+	.account-container-larger {width: 280px; margin-top: 35px;}
+	.register .login-fields .field-flex {margin-bottom: 1.25em;display:block;}
+}
+.rcontainer {display: block;position: relative;padding-left: 35px;margin-bottom: 30px;cursor: pointer;font-size: 24px; margin-left: 15px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+.rcontainer input {position: absolute;opacity: 0;}
+.checkmark {position: absolute;top: 0;left: 0;height: 25px;width: 25px;background-color: #eee;border-radius: 50%; border: 1px solid;}
+.rcontainer:hover input ~ .checkmark {background-color: #ccc;}
+.rcontainer input:checked ~ .checkmark {background-color: #515151;}
+.checkmark:after {content: "";position: absolute;display: none;}
+.rcontainer input:checked ~ .checkmark:after {display: block;}
+.rcontainer .checkmark:after {top: 9px;left: 9px;width: 8px;height: 8px;border-radius: 50%;background: white;}
+
+@media(max-width:768px){
+	.rcontainer {font-size: 24px;}
+}
+@media (max-width: 480px) {
+	.rcontainer {font-size: 16px;}
+}
+

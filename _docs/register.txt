@@ -1,0 +1,645 @@
+<?php 
+include_once("_sys/check_login_status.php");
+if($user_ok == true){
+	header("location: sync&".$_SESSION["email_hash"]);
+    exit();
+}
+?><?php
+if(isset($_POST["e"])){	
+	$_SESSION['e'] = $email = mysqli_real_escape_string($db_connection, $_POST['e']);
+	$_SESSION['p1'] = $pass = $_POST['p1'];
+	$sql = "SELECT id FROM user_account WHERE email='$email'";
+    $query = mysqli_query($db_connection, $sql); 
+	$e_check1 = mysqli_num_rows($query);
+	$userstring1 = "";
+	if($email == "" || $pass == ""){
+		echo 'Form submission is missing values';
+        exit();
+	} else if ($e_check1 > 0){ 
+        echo 'Email address is already in use';
+        exit();
+	}/*  else if (strlen($pass) < 8) {
+        echo "Password is too short. Try 8 or more characters";
+        exit(); 
+    } */ else {		
+		$p_hash = md5($pass);
+		$userstring1 .= "success|$email|$p_hash|||";
+		$userstring1 = trim($userstring1, "|||");
+		echo $userstring1;
+		exit();
+	}
+	exit();
+}
+?><?php
+if(isset($_POST["role"])  && isset($_POST["email"])){	
+	$_SESSION['role'] = $role = $_POST['role'];
+	$e = mysqli_real_escape_string($db_connection, $_POST['email']);
+	$p = $_POST['p'];
+	$userstring2 = "";
+	if($role == "" || $e == "" || $p == ""){
+		echo 'An unknown error occured';
+        exit();
+	} else {		
+		$userstring2 .= "success|$e|$p|$role|||";
+		$userstring2 = trim($userstring2, "|||");
+		echo $userstring2;
+		exit();
+	}
+	exit();
+}
+?><?php
+// Job seeker 1
+if(isset($_POST["f"]) && isset($_POST["l"])){	
+    $_SESSION['f'] = $f = preg_replace('#[^a-z ]#i', '', $_POST['f']);
+	$_SESSION['l'] = $l = preg_replace('#[^a-z ]#i', '', $_POST['l']);
+	$_SESSION['g'] = $gender = preg_replace('#[^a-z ]#i', '', $_POST['g']);
+	$_SESSION['dob'] = $dob = $_POST['dob'];
+	$role_o = $_POST['role'];
+	$e_o = mysqli_real_escape_string($db_connection, $_POST['mail']);
+	$p_o = $_POST['pwd'];
+	$userstring3 = "";
+	if($f == "" || $l == "" || $gender == "Gender:" || $dob == "" || $role_o == "" || $e_o == "" || $p_o == ""){
+		echo 'An unknown error occured';
+        exit();
+	} else {		
+		$userstring3 .= "success|$e_o|$p_o|$role_o|$f|$l|$gender|$dob|||";
+		$userstring3 = trim($userstring3, "|||");
+		echo $userstring3;
+		exit();
+	}
+	exit();
+}
+?><?php
+// Job seeker 2
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Join Owlphin now</title>
+<?php include_once("_ext/default_head.php");?>
+<link href="_css/p.login-register-reset.css" rel="stylesheet">
+</head>
+<body class="register-background">
+<?php include_once("_ext/pageloader.php");?>
+<?php include_once("_ext/pageloader-starter.php");?>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container"> 
+		  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+		  </a>
+		  <a class="brand"  href="javascript:void(0)" onclick="owlphinhome()">
+			<img src="_img/owlphin_log.png" style="height:30px;" />
+			<span></span>
+		  </a>
+		  <div class="nav-collapse" id="hideloginbtn">
+			<ul class="nav pull-right">
+			  <li><button class="btn btn-inverse" onclick="login()">Sign in</button></li>
+			</ul>
+		  </div>
+		</div>
+	</div> 
+</div>
+<div id="registerform" style="display:;">
+	<div class="account-container register">
+	  <div id="showloader1" class="div-loader-cover"><div class="spinner"></div></div>
+	  <div class="content clearfix">	
+		<form role="form" method="post" onSubmit="return false;">
+		  <div class="register-logo">
+			<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>
+			<h1>Let's get started</h1>	
+			<span id="status1"><h5>Over 10,000 people have landed jobs through Owlphin</h5></span>
+		  </div>		
+		  <div class="login-fields">
+			<div class="field">
+			  <input type="text" id="email" name="email" placeholder="Email address" onblur="emailValidation()" onkeyup="restrict('email')" onfocus="emptyElement('status1')" />
+			</div>
+			<div class="field">
+			  <input type="password" id="pass1" name="pass1" placeholder="Password" onfocus="emptyElement('status1')" maxlength="40" onpaste="return false" />
+			</div>
+			<div class="field">
+			  <input type="password" id="pass2" name="pass2" placeholder="Confirm Password" onfocus="emptyElement('status1')" maxlength="40" onpaste="return false" />
+			</div>	
+			<div class="login-actions">	
+			  <!-- <p class="text-center" style="margin-top:10px;font-size:10px;">Clicking 'Join now' means you agree with our User Agreement, Privacy Policy and Cookies Policy.</p> -->				
+			  <button class="button btn btn-inverse btn-large" onclick="nextone()">Join now</button>
+			</div>
+		  </div>
+		</form>	
+	  </div>
+	</div>
+</div>
+<div id="jobseeker" style="display:none;">
+<div id="jobseeker3" style="display:none;">
+	<div class="account-container register" style="width:53%;">
+	  <div id="showloader" class="div-loader-cover"><div class="spinner"></div></div>
+	  <div class="content clearfix">	
+		<form role="form" method="post" onSubmit="return false;">
+		  <div class="register-logo">
+			<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>
+			<h3>Tell us about your most recent job</h3>	
+		  </div>			  
+		  <div class="login-fields">
+			<div class="field" style="display:inline-flex;">
+			  <input type="text" id="job_nm" name="job_nm" placeholder="Job title" />
+			  <input style="margin-left:20px;" type="text" id="job_company" name="job_company" placeholder="Job Company" />
+			</div>
+			<div class="field" style="display:inline-flex;">
+			  <input type="text" id="company_nm" name="company_nm" placeholder="Company/ Industry" />
+			  <input style="margin-left:20px;" type="text" id="bb_stream" name="bb_stream" placeholder="Business Stream" />
+			</div>
+			<div class="field" style="display:inline-flex;">
+			  <div>
+			  <label class="text-center" for="start_dt">From:</label>
+			  <input type="date" id="start_dt" name="start_dt" />
+			  </div>
+			  <div style="margin-left:20px;">
+			  <label class="text-center" for="end_dt">To:</label>
+			  <input type="date" id="end_dt" name="end_dt" />
+			  </div>
+			</div>
+			<div class="login-actions">	
+			  <!-- <p class="text-center" style="margin-top:10px;font-size:10px;">Clicking 'Join now' means you agree with our User Agreement, Privacy Policy and Cookies Policy.</p> -->				
+			  <button class="button btn btn-inverse btn-large">Continue</button>
+			</div>
+			<div class="login-extra" style="margin: 1.5em auto -25px auto;"><br><br>
+			  <a href="javascript:void(0)">I'm unemployed</a> 
+			  <br><br>
+			  <a href="javascript:void(0)">Skip</a> 
+			 </div>
+		  </div>
+		</form>	
+	  </div>
+	</div>
+</div>
+<div id="jobseeker4" style="display:none;">
+	<div class="account-container register" style="width:53%;">
+	  <div id="showloader" class="div-loader-cover"><div class="spinner"></div></div>
+	  <div class="content clearfix">	
+		<form role="form" method="post" onSubmit="return false;">
+		  <div class="register-logo">
+			<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>
+			<h1>Well done ?user?</h1>	
+			<h3>We've sent you an email. Please enter activation code here.</h3>	
+		  </div>			  
+		  <div class="login-fields text-center">
+			<label class="text-center" for="code">Activation code:</label>
+			<div class="field" style="display:inline-flex;">
+			  <input type="text" id="code" name="code" placeholder="0-0-0-0-0-0-0-0" />
+			</div>
+			<div class="login-actions" style="width: 72%;">	
+			  <!-- <p class="text-center" style="margin-top:10px;font-size:10px;">Clicking 'Join now' means you agree with our User Agreement, Privacy Policy and Cookies Policy.</p> -->				
+			  <button style="width: 290px;" class="button btn btn-inverse btn-large">Finish</button>
+			</div>
+		  </div>
+		</form>	
+	  </div>
+	</div>
+</div>
+</div>
+
+
+<div id="recruiter" style="display:none;">
+<div id="recruiter1" style="display:;">
+	<div class="account-container register" style="width:53%;">
+	  <div id="showloader" class="div-loader-cover"><div class="spinner"></div></div>
+	  <div class="content clearfix">	
+		<form role="form" method="post" onSubmit="return false;">
+		  <div class="register-logo">
+			<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>
+			<h3>Tell us about your company</h3>	
+		  </div>			  
+		  <div class="login-fields">
+			<div class="field">
+			  <input style="width:96%;" type="text" id="company_name" name="company_name" placeholder="Company name" />
+			</div>
+			<div class="field" style="display:inline-flex;">
+			  <input type="text" id="company_url" name="company_url" placeholder="Company website url (optional)" />
+			  <input style="margin-left:20px;" type="text" id="b_stream" name="b_stream" placeholder="Business Stream" />
+			</div>
+			<div class="field" style="display:inline-flex;">
+			  <div>
+			  <label class="text-center" for="comp_email">Company email address:</label>
+			  <input type="email" id="comp_email" name="comp_email" placeholder="Email" />
+			  </div>
+			  <div style="margin-left:20px;">
+			  <label class="text-center" for="comp_contact">Telephone number:</label>
+			  <input type="text" id="comp_contact" name="comp_contact" placeholder="Telephone" />
+			  </div>
+			</div>
+			<div class="login-actions">	
+			  <!-- <p class="text-center" style="margin-top:10px;font-size:10px;">Clicking 'Join now' means you agree with our User Agreement, Privacy Policy and Cookies Policy.</p> -->				
+			  <button class="button btn btn-inverse btn-large">Continue</button>
+			</div>
+		  </div>
+		</form>	
+	  </div>
+	</div>
+</div>
+<div id="recruiter2" style="display:;">
+	<div class="account-container register">
+	  <div id="showloader" class="div-loader-cover"><div class="spinner"></div></div>
+	  <div class="content clearfix">	
+		<form role="form" method="post" onSubmit="return false;">
+		  <div class="register-logo">
+			<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>
+			<h3>Add company logo or image</h3>	
+		  </div>			  
+		  <div class="login-fields text-center">
+			<div class="profile-img" style="width:160px;height:160px;border:1px solid; border-radius:50%;margin:auto;"></div>
+			<h2>?company_name?</h2>
+			<h3>?company_business_stream?</h3>
+			<h4>?company_email?</h4>
+			<br />
+			<div class="login-actions">	
+			  <!-- <p class="text-center" style="margin-top:10px;font-size:10px;">Clicking 'Join now' means you agree with our User Agreement, Privacy Policy and Cookies Policy.</p> -->				
+			  <button class="button btn btn-inverse btn-large">Continue</button>
+			</div>
+			<div class="login-extra" style="margin: 1.5em auto -25px auto;"><br><br>
+			  <a href="javascript:void(0)">Skip</a> 
+			 </div>
+		  </div>
+		</form>	
+	  </div>
+	</div>
+</div>
+<div id="recruiter3" style="display:;">
+	<div class="account-container register" style="width:53%;">
+	  <div id="showloader" class="div-loader-cover"><div class="spinner"></div></div>
+	  <div class="content clearfix">	
+		<form role="form" method="post" onSubmit="return false;">
+		  <div class="register-logo">
+			<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>
+			<h3>We've sent an activation email to ?company_name?. </h3>	
+			<h3>Please enter activation code here.</h3>	
+		  </div>			  
+		  <div class="login-fields text-center">
+			<label class="text-center" for="code">Activation code:</label>
+			<div class="field" style="display:inline-flex;">
+			  <input type="text" id="code2" name="code2" placeholder="0-0-0-0-0-0-0-0" />
+			</div>
+			<div class="login-actions" style="width: 72%;">	
+			  <!-- <p class="text-center" style="margin-top:10px;font-size:10px;">Clicking 'Join now' means you agree with our User Agreement, Privacy Policy and Cookies Policy.</p> -->				
+			  <button style="width: 290px;" class="button btn btn-inverse btn-large">Finish</button>
+			</div>
+		  </div>
+		</form>	
+	  </div>
+	</div>
+</div>
+</div>
+<div class="footer mobile-no-show" style="bottom: 0;position: fixed;right: 0;left: 0;"><?php include_once("_ext/footer.php");?></div>
+<?php include_once("_ext/default_js.php");?>
+<script type="text/javascript">
+function restrict(elem){
+	var tf = _(elem);
+	var rx = new RegExp;
+	if(elem == "email"){
+		rx = /[' "]/gi;
+	}else if(elem == "fname"){
+		rx = /[^a-z-]/gi;
+	}else if(elem == "lname"){
+		rx = /[^a-z-]/gi;
+	}
+	tf.value = tf.value.replace(rx, "");
+}
+function emptyElement(x){
+	if(x == "status1"){
+		_(x).innerHTML = "<h5>Over 10,000 people have landed jobs through Owlphin</h5>";
+	}else if(x == "status2"){
+		_(x).innerHTML = "<h5>Let\'s know your role</h5>";
+	}else{
+		_(x).innerHTML = "";
+	}
+}
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+function emailValidation() {
+  var e = _("email").value;
+  if (!validateEmail(e)) {
+	_("email").style.borderColor = "red";
+  }
+  return false;
+}
+function nextone(){
+	var e = _("email").value;
+	var p1 = _("pass1").value;
+	var p2 = _("pass2").value;
+	var status1 = _("status1");
+	if(e == "" || p1 == "" || p2 == ""){
+		status1.innerHTML = '<h5><div class="alert">Please fill out all of the form data</div></h5>';
+	}else if(!e.replace(/\s/g, '').length){
+		status1.innerHTML = '<h5><div class="alert">Please fill out all of the form data</div></h5>';
+	}else if(!validateEmail(e)){
+		status1.innerHTML = '<h5><div class="alert">Your email is invalid</div></h5>';
+	}else if(p1 != p2){
+		status1.innerHTML = '<h5><div class="alert">Your passwords do not match</div></h5>';;
+	}else {
+		_("showloader1").style.display = "block";
+		var ajax = ajaxObj("POST", "register.php");
+        ajax.onreadystatechange = function() {
+	        if(ajaxReturn(ajax) == true) {
+				var ustring = ajax.responseText.split("|||");
+				for (var i = 0; i < ustring.length; i++){
+					var string = ustring[i].split("|");		
+				}		
+				var text = string[0];
+				var email = string[1];
+				var pass = string[2];
+	            if(text != "success"){
+					_("showloader1").style.display = "none";
+					status1.innerHTML = '<h5><div class="alert">'+ajax.responseText+'</div></h5>';
+				} else {
+					_("hideloginbtn").innerHTML = '<ul class="nav pull-right"><li><button class="btn btn-inverse" onclick="register()">Cancel</button></li></ul>';
+					window.scrollTo(0,0);	
+					_("registerform").innerHTML = '	<div class="account-container register">'+
+												'<div id="showloader2" class="div-loader-cover"><div class="spinner"></div></div>'+
+												'<div class="content clearfix">'+
+												'<form role="form" method="post" onSubmit="return false;">'+
+												'  <div class="register-logo">'+
+												'	 <span><img src="_img/owlphin_log.png" style="width:55px;" /></span>'+
+												'	 <h1>Hi there</h1>'+
+												'	  <span id="status2"><h5>Let\'s know your role</h5></span>'+
+												'   </div>'+		
+												'<div class="login-fields">'+
+												'  <div class="field">'+
+												'	  <input type="radio" name="user_role" checked id="none" value="none" style="visibility:hidden;">'+
+												'	  <label class="rcontainer">Sign up as a Job Seeker'+
+												'		<input type="radio" name="user_role" id="seeker" value="seeker" onfocus="emptyElement(\'status2\')">'+
+												'		<span class="checkmark"></span>'+
+												'	  </label>'+
+												'	  <label class="rcontainer">Sign up as a Recruiter'+
+												'		<input type="radio" name="user_role" id="recruiter" value="recruiter" onfocus="emptyElement(\'status2\')">'+
+												'		<span class="checkmark"></span>'+
+												'	  </label>'+
+												'	</div>'+
+												'	<div class="login-actions">'+	
+												'	  <button class="button btn btn-inverse btn-large" onclick="nexttwo(\''+email+'\',\''+pass+'\')">Continue</button>'+
+												'	</div>'+
+												'</div></form></div></div>';		
+				}
+	        }
+        }
+      ajax.send("e="+e+"&p1="+encodeURIComponent(p1));
+	}
+}
+function nexttwo(email,pass){
+	var role = document.querySelector('input[name = "user_role"]:checked').value;
+	var status2 = _("status2");
+	if(role == "none"){
+		status2.innerHTML = '<h5><div class="alert">Please select an option</div></h5>';
+	}else{
+		_("showloader2").style.display = "block";
+		var ajax = ajaxObj("POST", "register.php");
+        ajax.onreadystatechange = function() {
+	        if(ajaxReturn(ajax) == true) {
+				var ustring = ajax.responseText.split("|||");
+				for (var i = 0; i < ustring.length; i++){
+					var string = ustring[i].split("|");		
+				}		
+				var text = string[0];
+				var e = string[1];
+				var p = string[2];
+				var userrole = string[3];
+	            if(text != "success"){
+					_("showloader2").style.display = "none";
+					status1.innerHTML = '<h5><div class="alert">'+ajax.responseText+'</div></h5>';
+				} else {
+					_("showloader2").style.display = "block";
+					if(userrole == "seeker"){
+					window.scrollTo(0,0);	
+					_("registerform").innerHTML = '	<div class="account-container register">'+
+												  '<div id="seekerloader1" class="div-loader-cover"><div class="spinner"></div></div>'+
+												  '<div class="content clearfix">'+
+													'<form role="form" method="post" onSubmit="return false;">'+
+													 ' <div class="register-logo">'+
+														'<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>'+
+														'<h3>Tell us about yourself</h3>'+
+														'<span id="status3"></span>'+
+													  '</div>'+			  
+													  '<div class="login-fields">'+
+														'<div class="field">'+
+														 ' <input type="text" id="fname" name="fname" placeholder="Firstname" onkeyup="restrict(\'fname\')" onfocus="emptyElement(\'status3\')" />'+
+														'</div>'+
+														'<div class="field">'+
+														 ' <input type="text" id="lname" name="lname" placeholder="Lastname" onkeyup="restrict(\'lname\')" onfocus="emptyElement(\'status3\')" />'+
+														'</div>'+
+														'<div class="field">'+
+														 ' <select style="border:1px solid #686868;" name="gender" id="gender" onfocus="emptyElement(\'status3\')">'+
+															'<option Selected disabled>Gender:</option>'+
+															'<option value="m">Male</option>'+
+															'<option value="f">Female</option>'+
+														  '</select>'+
+														'</div>'+
+														'<div class="field">'+
+														 ' <label class="text-center" for="dob">Date of Birth:</label>'+
+														  '<input type="date" id="dob" name="dob" placeholder="Date of Birth:" onfocus="emptyElement(\'status3\')" />'+
+														'</div>'+
+														'<div class="login-actions">	'+
+														'  <button class="button btn btn-inverse btn-large" onclick="seeker1(\''+e+'\',\''+p+'\',\''+userrole+'\')">Continue</button>'+
+														'</div>'+
+													  '</div></form></div></div>';	
+					}else if(userrole == "recruiter"){
+						window.scrollTo(0,0);	
+						_("registerform").innerHTML = '	<div class="account-container register" style="width:53%;">'+
+													  '<div id="recruiterloader1" class="div-loader-cover"><div class="spinner"></div></div>'+
+													  '<div class="content clearfix">'+	
+														'<form role="form" method="post" onSubmit="return false;">'+
+														 ' <div class="register-logo">'+
+															'<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>'+
+															'<h3>Tell us about your company</h3>	'+
+														 ' </div>'+			  
+														  '<div class="login-fields">'+
+															'<div class="field">'+
+															 ' <input style="width:96%;" type="text" id="company_name" name="company_name" placeholder="Company name" />'+
+															'</div>'+
+															'<div class="field" style="display:inline-flex;">'+
+															 ' <input type="text" id="company_url" name="company_url" placeholder="Company website url (optional)" />'+
+															  '<input style="margin-left:20px;" type="text" id="b_stream" name="b_stream" placeholder="Business Stream" />'+
+															'</div>'+
+															'<div class="field" style="display:inline-flex;">'+
+															 ' <div>'+
+															 ' <label class="text-center" for="comp_email">Company email address:</label>'+
+															  '<input type="email" id="comp_email" name="comp_email" placeholder="Email" />'+
+															 ' </div>'+
+															 ' <div style="margin-left:20px;">'+
+															  '<label class="text-center" for="comp_contact">Telephone number:</label>'+
+															  '<input type="text" id="comp_contact" name="comp_contact" placeholder="Telephone" />'+
+															 ' </div>'+
+															'</div>'+
+															'<div class="login-actions">'+		
+															  '<button class="button btn btn-inverse btn-large">Continue</button>'+
+															'</div>'+
+														  '</div></form></div></div>';	
+					}	
+				}
+	        }
+        }
+      ajax.send("role="+role+"&email="+encodeURIComponent(email)+"&p="+encodeURIComponent(pass));
+	}
+}
+function seeker1(email,pass,role){
+    var f = _("fname").value;
+	var l = _("lname").value;
+	var g = _("gender").value;
+	var dob = _("dob").value;
+	var status3 = _("status3");
+	if(f == "" || l == "" || g == "Gender:" || dob == ""){
+		status3.innerHTML = '<h5><div class="alert">Please fill out all of the form data</div></h5>';
+	}else if(!f.replace(/\s/g, '').length || !l.replace(/\s/g, '').length || !g.replace(/\s/g, '').length){
+		status3.innerHTML = '<h5><div class="alert">Please fill out all of the form data</div></h5>';
+	} else {
+		_("seekerloader1").style.display = "block";
+		var ajax = ajaxObj("POST", "register.php");
+        ajax.onreadystatechange = function() {
+	        if(ajaxReturn(ajax) == true) {
+				var ustring = ajax.responseText.split("|||");
+				for (var i = 0; i < ustring.length; i++){
+					var string = ustring[i].split("|");		
+				}		
+				var text = string[0];
+				var e = string[1];
+				var p = string[2];
+				var userrole = string[3];
+				var fname = string[4];
+				var lname = string[5];
+				var gender = string[5];
+				var dateofbirth = string[6];
+	            if(text != "success"){
+					_("seekerloader1").style.display = "none";
+					status3.innerHTML = '<h5><div class="alert">'+ajax.responseText+'</div></h5>';
+				} else {
+					window.scrollTo(0,0);	
+					_("registerform").innerHTML = '<div class="account-container register" style="width:53%;">'+
+												  '<div id="seekerloader2" class="div-loader-cover"><div class="spinner"></div></div>'+
+												  '<div class="content clearfix">'+	
+													'<form role="form" method="post" onSubmit="return false;">'+
+													 ' <div class="register-logo">'+
+														'<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>'+
+														'<h3>Tell us about your education background</h3>'+	
+														'<span id="status4"></span>'+
+													  '</div>'+			  
+													  '<div class="login-fields">'+
+														'<div class="field">'+
+														 ' <input style="width:96%;" type="text" id="uni" name="uni" placeholder="Institute/ University" onfocus="emptyElement(\'status4\')" />'+
+														'</div>'+
+														'<div class="field" style="display:inline-flex;">'+
+														 ' <input type="text" id="major" name="major" placeholder="Major" onfocus="emptyElement(\'status4\')" />'+
+														  '<input style="margin-left:20px;" type="text" id="degree" name="degree" placeholder="Degree" onfocus="emptyElement(\'status4\')" />'+
+														'</div>'+
+														'<div class="field" style="display:inline-flex;">'+
+														 ' <input type="text" id="pecentage" name="pecentage" placeholder="Pecentage (disabled)" style="border-color: rgba(255, 255, 255, 0.8);" disabled/>'+
+														  '<input style="margin-left:20px;" type="text" id="cgpa" name="cgpa" placeholder="cgpa (optional)" onfocus="emptyElement(\'status4\')" />'+
+														'</div>'+
+														'<div class="field" style="display:inline-flex;">'+
+														 ' <div>'+
+														  '<label class="text-center" for="start_date">From:</label>'+
+														  '<input type="date" id="start_date" name="start_date" />'+
+														  '</div>'+
+														  '<div style="margin-left:20px;">'+
+														  '<label class="text-center" for="end_date">To:</label>'+
+														  '<input type="date" id="end_date" name="end_date" onfocus="emptyElement(\'status4\')" />'+
+														  '</div>'+
+														'</div>'+
+														'<div class="login-actions">	'+			
+														 ' <button class="button btn btn-inverse btn-large" onclick="seeker2(\''+e+'\',\''+p+'\',\''+userrole+'\',\''+fname+'\',\''+lname+'\',\''+gender+'\',\''+dateofbirth+'\')">Continue</button>'+
+														'</div>'+
+														'<div class="login-extra" style="margin: 1.5em auto -25px auto;"><br><br>'+
+														 ' <a href="javascript:void(0)">I\'m a Student</a>'+ 
+														 '<br /><br />'+
+														 ' <a href="javascript:void(0)">Skip</a> '+
+														 '</div>'+
+													  '</div></form></div></div>';		
+				}
+	        }
+        }
+      ajax.send("f="+f+"&l="+l+"&g="+g+"&dob="+encodeURIComponent(dob)+"&role="+role+"&mail="+encodeURIComponent(email)+"&pwd="+encodeURIComponent(pass));
+	}
+}
+function seeker2(email,pass,role,f,l,g,dob){
+    var uni = _("uni").value;
+	var major = _("major").value;
+	var degree = _("degree").value;
+	var cgpa = _("cgpa").value;
+	var fr = _("start_date").value;
+	var to = _("end_date").value;
+	var status4 = _("status4");
+	if(uni == "" || major == "" || degree == "" || fr == "" || to == ""){
+		status4.innerHTML = '<h5><div class="alert">Please fill out all of the form data</div></h5>';
+	}else if(!uni.replace(/\s/g, '').length || !major.replace(/\s/g, '').length){
+		status4.innerHTML = '<h5><div class="alert">Please fill out all of the form data</div></h5>';
+	} else {
+		_("seekerloader2").style.display = "block";
+		var ajax = ajaxObj("POST", "register.php");
+        ajax.onreadystatechange = function() {
+	        if(ajaxReturn(ajax) == true) {
+				var ustring = ajax.responseText.split("|||");
+				for (var i = 0; i < ustring.length; i++){
+					var string = ustring[i].split("|");		
+				}		
+				var text = string[0];
+				var e = string[1];
+				var p = string[2];
+				var userrole = string[3];
+				var fname = string[4];
+				var lname = string[5];
+				var gender = string[5];
+				var dateofbirth = string[6];
+	            if(text != "success"){
+					_("seekerloader2").style.display = "none";
+					status3.innerHTML = '<h5><div class="alert">'+ajax.responseText+'</div></h5>';
+				} else {
+					window.scrollTo(0,0);	
+					_("registerform").innerHTML = '<div class="account-container register" style="width:53%;">'+
+												  '<div id="seekerloader2" class="div-loader-cover"><div class="spinner"></div></div>'+
+												  '<div class="content clearfix">'+	
+													'<form role="form" method="post" onSubmit="return false;">'+
+													 ' <div class="register-logo">'+
+														'<span><img src="_img/owlphin_log.png" style="width:55px;" /></span>'+
+														'<h3>Tell us about your education background</h3>'+	
+														'<span id="status4"></span>'+
+													  '</div>'+			  
+													  '<div class="login-fields">'+
+														'<div class="field">'+
+														 ' <input style="width:96%;" type="text" id="uni" name="uni" placeholder="Institute/ University" />'+
+														'</div>'+
+														'<div class="field" style="display:inline-flex;">'+
+														 ' <input type="text" id="major" name="major" placeholder="Major" />'+
+														  '<input style="margin-left:20px;" type="text" id="degree" name="degree" placeholder="Degree" />'+
+														'</div>'+
+														'<div class="field" style="display:inline-flex;">'+
+														 ' <input type="text" id="pecentage" name="pecentage" placeholder="Pecentage" />'+
+														  '<input style="margin-left:20px;" type="text" id="cgpa" name="cgpa" placeholder="cgpa" />'+
+														'</div>'+
+														'<div class="field" style="display:inline-flex;">'+
+														 ' <div>'+
+														  '<label class="text-center" for="start_date">From:</label>'+
+														  '<input type="date" id="start_date" name="start_date" />'+
+														  '</div>'+
+														  '<div style="margin-left:20px;">'+
+														  '<label class="text-center" for="end_date">To:</label>'+
+														  '<input type="date" id="end_date" name="end_date" />'+
+														  '</div>'+
+														'</div>'+
+														'<div class="login-actions">	'+			
+														 ' <button class="button btn btn-inverse btn-large" onclick="seeker1(\''+e+'\',\''+p+'\',\''+userrole+'\',\''+fname+'\',\''+lname+'\',\''+gender+'\',\''+dateofbirth+'\')">Continue</button>'+
+														'</div>'+
+														'<div class="login-extra" style="margin: 1.5em auto -25px auto;"><br><br>'+
+														 ' <a href="javascript:void(0)">I\'m a Student</a>'+ 
+														 '<br /><br />'+
+														 ' <a href="javascript:void(0)">Skip</a> '+
+														 '</div>'+
+													  '</div></form></div></div>';		
+				}
+	        }
+        }
+      ajax.send("uni="+uni+"&major="+major+"&degree="+degree+"&cgpa="+cgpa+"&fr="+fr+"&to="+to+"&fn="+f+"&ln="+l+"&gdr="+g+"&db="+encodeURIComponent(dob)+"&role="+role+"&email="+encodeURIComponent(email)+"&pwd="+encodeURIComponent(pass));
+	}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+ <div class="row" <?php echo $usershow;?>>
+			<div class="span6">
+			  <div class="widget widget-nopad">
+				<div class="widget-header"> <i class="fa fa-mortar-board"></i>
+				  <h3>Education</h3>
+				  <div style="float:right;margin-right: 10px;"><button <?php echo $addBtn;?> class="btn btn-small" pd-popup-open="addeducation"> Add</button></div>
+				</div>
+				<div class="widget-content">
+				  <div class="widget big-stats-container" style="margin-bottom: 1em;">
+					<div class="widget-content">
+					  <div class="big_stats">
+					     <div class="profile_widgets"> 
+						  <div id="user_edu">
+						    <?php echo $eduList;?>
+							<div id="" class="profile_widget">
+						  <div class="profile_widget-image">
+						    <span class="fa fa-institution"></span>
+						  </div>
+						  <div class="profile_widget-details"><h3>GTUC</h3>
+						    <h4 style="margin-top:5px;">Degree, Major - From ?? to ??</h4>
+							</div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div class="span6">
+			  <div class="widget widget-nopad">
+				<div class="widget-header"> <i class="fa fa-suitcase"></i>
+				  <h3>Experience</h3>
+				  <div style="float:right;margin-right: 10px;"><button <?php echo $addBtn;?> class="btn btn-small" pd-popup-open="addxp">Add</button></div>
+				</div>
+				<div class="widget-content">
+				  <div class="widget big-stats-container" style="margin-bottom: 1em;">
+					<div class="widget-content">
+					  <div class="big_stats">
+					     <div class="profile_widgets"> 
+						  <div id="user_xp">
+						    <?php echo $xpList;?>
+							<div id="" class="profile_widget">
+						  <div class="profile_widget-image">
+						    <span class="fa fa-briefcase"></span>
+						  </div>
+						  <div class="profile_widget-details"><h3>Teacher</h3>
+						    <h4 style="margin-top:5px;">Little Saint - Education</h4>
+						    <h4 style="margin-top:5px;">Consulting/Business Strategy </h4>
+							</div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>

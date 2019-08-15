@@ -1,0 +1,30 @@
+.contain {width: 400px;margin: 50px auto 20px;font-size: 14px;box-shadow: 0px 6px 10px 1px #a8a8a8;}
+.title {padding-bottom: 5px;color: #000;}
+.chat {height: 300px;overflow-y: scroll;background-color: #f5f5f5;}
+.chat div {margin: 10px 12px 15px;line-height: 25px;}
+.chat .party {font-weight: bolder;}
+.chat .you {color: #006699;font-weight: bolder;border: 1px solid;padding: 5px;}
+.chat .other {color: #000;border: 1px solid;padding: 5px;}
+.chat .text {}
+.busy {position: absolute;padding: 3px 0;color: #a19a9a;display: none;font-size: 11px;margin: 35px auto auto 5px;}
+.input {margin-top: 5px;}
+.input input {width: 84%;vertical-align: top;float: left;border: 1px solid #ccc;padding: 5px;margin: 0}
+.input a {vertical-align: top;float: right;font-weight: bold;border: 1px solid #ccc;background-color: #efefef;padding: 3px 15px;color: black;text-decoration: none;border-radius: 5px;}
+.input a:hover {background-color: #ddd;cursor: pointer;}
+@media (max-width: 480px) {
+	.contain {width: 300px;margin: 20px auto 20px;}
+	.chat {height: 260px;overflow-y: scroll;}
+	.owlbody .footer {display:none;}
+}
+.owlbody .navbar-inner {background: #f5f5f5 !important;}
+
+.owl-gradient {
+	background: linear-gradient(-45deg, #F5F5F5, #E6E6E6, #F5F5F5, #F3F3F3);
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 15s ease infinite;
+	animation: Gradient 15s ease infinite;
+}
+@-webkit-keyframes Gradient {0% {background-position: 0% 50%}50% {background-position: 100% 50%}100% {background-position: 0% 50%}}
+@-moz-keyframes Gradient {0% {background-position: 0% 50%}50% {background-position: 100% 50%}100% {background-position: 0% 50%}}
+@keyframes Gradient {0% {background-position: 0% 50%}50% {background-position: 100% 50%}100% {background-position: 0% 50%}}
