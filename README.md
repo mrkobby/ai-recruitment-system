@@ -17,4 +17,4 @@ That's it!!!
 
 <b>UIs</b>
 
-![alt text](https://raw.githubusercontent.com/mrkobby/ai-recruitment-system/blob/master/ui1.png)
+![alt text](https://github.com/mrkobby/ai-recruitment-system/blob/master/ui1.png)
