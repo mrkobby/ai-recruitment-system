@@ -1,6 +1,5 @@
 <?php
-//$db_connection = mysqli_connect("localhost","bacsyd","!booBies(o)1???","bacsyd");
-$db_connection = mysqli_connect("localhost","root","","owlphin");
+$db_connection = mysqli_connect("localhost","root","db_password","db_name");
 if (mysqli_connect_errno()){
 		echo mysqli_connect_error();
 		exit();
